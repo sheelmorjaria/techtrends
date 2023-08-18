@@ -11,8 +11,8 @@ spec:
   source:
     helm:
       valueFiles:
-        -values-prod.yaml
-    path: techtrends
+        - values-prod.yaml
+    path: helm
     repoURL: https://github.com/sheelmorjaria/techtrends
     targetRevision: HEAD
   syncPolicy: {}

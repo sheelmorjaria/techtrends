@@ -12,7 +12,7 @@ spec:
     helm:
       valueFiles:
         - values-staging.yaml
-    path: techtrends
+    path: helm
     repoURL: https://github.com/sheelmorjaria/techtrends
     targetRevision: HEAD
   syncPolicy: {}
