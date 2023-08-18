@@ -1,0 +1,7 @@
+.env/
+.venv/
+.vagrant/
+.myvenv/
+__pycache__/
+.vscode/
+.git/
