@@ -6,7 +6,7 @@ service:
   protocol: TCP
   type: ClusterIP
 image:
-  repository: techtrends 
+  repository: techtrends
   tag: latest
   pullPolicy: IfNotPresent
 replicaCount: 1
