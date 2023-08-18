@@ -2,15 +2,15 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: {{ .Values.appname }}
+    app: techtrends
     tag: latest
-  name: {{ .Values.appname }}
+  name: techtrends
   namespace: {{ .Values.namespace.name }} 
 spec:
   replicas: {{ .Values.replicaCount }} 
   selector:
     matchLabels:
-      app: {{ .Values.appname }}
+      app: techtrends
       tag: latest
   strategy:
     rollingUpdate:
@@ -20,13 +20,13 @@ spec:
   template:
     metadata:
       labels:
-        app: {{ .Values.appname }}
+        app: techtrends
         tag: latest
     spec:
       containers:
       - image: semanticonic/{{ .Values.image.repository }}:{{ .Values.image.tag }}
         imagePullPolicy: {{ .Values.image.pullPolicy }}
-        name: {{ .Values.appname }}
+        name: techtrends
         ports:
         - containerPort: {{ .Values.containerPort }}
         readinessProbe:
