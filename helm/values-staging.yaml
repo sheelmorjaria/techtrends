@@ -5,8 +5,8 @@ service:
   port: 5111
 resources:
   requests:
-    cpu: 90Mi
-    memory: 300m
+    cpu: 90m
+    memory: 300Mi
   limits:
-    cpu: 128Mi
-    memory: 500m
+    cpu: 128m
+    memory: 500Mi

@@ -7,8 +7,8 @@ image:
   pullPolicy: Always
 resources:
   requests:
-    cpu: 128Mi
-    memory: 350m
+    cpu: 128m
+    memory: 350Mi
   limits:
-    cpu: 256Mi
-    memory: 500m
+    cpu: 256m
+    memory: 500Mi

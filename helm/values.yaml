@@ -12,11 +12,11 @@ image:
 replicaCount: 1
 resources:
   requests:
-    cpu: 64Mi
-    memory: 250m
+    cpu: 64m
+    memory: 250Mi
   limits:
-    cpu: 128Mi
-    memory: 500m
+    cpu: 128m
+    memory: 500Mi
 containerPort: 3111
 livenessProbe:
   path: /healthz
