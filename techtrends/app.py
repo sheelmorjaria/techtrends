@@ -5,6 +5,19 @@ import logging
 from datetime import datetime
 import sys
 connection_count = 0
+stdoutlogger = logging.getLogger("stdout")
+stderrlogger = logging.getLogger("stderr")
+stdoutlogger.setLevel(logging.DEBUG)
+stderrlogger.setLevel(logging.DEBUG)
+stdouthandler = logging.StreamHandler(sys.stdout)
+stderrhandler = logging.StreamHandler(sys.stderr)
+formatter = logging.Formatter('%(levelname)s: %(name)s - %(asctime)s - %(message)s',"%m/%d/%Y, %H:%M:%S")
+stdouthandler.setFormatter(formatter)
+stderrhandler.setFormatter(formatter)
+stdoutlogger.addHandler(stdouthandler)
+stderrlogger.addHandler(stderrhandler)
+
+
 
 
 # Function to get a database connection.
@@ -44,16 +57,16 @@ def index():
 def post(post_id):
     post = get_post(post_id)
     if post is None:
-      app.logger.error(datetime.now().strftime("%m/%d/%Y, %H:%M:%S") + " " + "Article with id: %s does not exist!", post_id)
+      stderrlogger.error("Article with id: %s does not exist!", post_id)
       return render_template('404.html'), 404
     else:
-      app.logger.info(datetime.now().strftime("%m/%d/%Y, %H:%M:%S") + " " + "Article %s retrieved!", post['title'])
+      stdoutlogger.debug("Article %s retrieved!", post['title'])
       return render_template('post.html', post=post)
 
 # Define the About Us page
-@app.route('/about')
+@app.route('/about')    
 def about():
-    app.logger.info(datetime.now().strftime("%m/%d/%Y, %H:%M:%S") + " " + 'About page retrieved!')
+    stdoutlogger.debug('About page retrieved!')
     return render_template('about.html')
 
 # Define the post creation functionality 
@@ -65,14 +78,14 @@ def create():
         if not title:
             flash('Title is required!')
         else:
-            global connection_count
             connection = get_db_connection()
+            global connection_count
             connection_count += 1
             connection.execute('INSERT INTO posts (title, content) VALUES (?, ?)', (title, content))
             connection.commit()
             connection.close()
             #log event
-            app.logger.info(datetime.now().strftime("%m/%d/%Y, %H:%M:%S") + " " + 'Article "%s" created!', title)
+            stdoutlogger.debug('Article "%s" created!', title)
             #log_events('Article "%s" created!', title) 
             return redirect(url_for('index'))
 
@@ -107,5 +120,4 @@ def metrics():
 
 # start the application on port 3111
 if __name__ == "__main__":
-   logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
    app.run(host='0.0.0.0', port='3111')
