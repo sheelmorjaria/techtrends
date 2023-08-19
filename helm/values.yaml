@@ -1,6 +1,7 @@
 namespace:
   name: sandbox
 service:
+  name: techtrends
   port: 4111
   targetPort: 3111
   protocol: TCP
@@ -12,11 +13,11 @@ image:
 replicaCount: 1
 resources:
   requests:
-    cpu: 64m
-    memory: 250Mi
+    cpu: 250m
+    memory: 64Mi
   limits:
-    cpu: 128m
-    memory: 500Mi
+    cpu: 500m
+    memory: 128Mi
 containerPort: 3111
 livenessProbe:
   path: /healthz
